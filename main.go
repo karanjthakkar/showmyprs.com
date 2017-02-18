@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
-	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -113,8 +112,6 @@ func main() {
 				fmt.Sprintf("type:pr author:%s is:public", username),
 				opt,
 			)
-
-			log.Println("waiting bro")
 
 			// Iterate over all closed pull requests to
 			// see which of them is merged and which one isn't
