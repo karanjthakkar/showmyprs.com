@@ -67,9 +67,15 @@ func main() {
 	// Set the router as the default one provided by Gin
 	router = gin.Default()
 
+	// Setup template folder
+	router.LoadHTMLGlob("templates/*")
+
+	router.Static("/assets", "./assets")
+
 	// Setup Github client
 	setupGithub()
 
+	// Cache repo data
 	CachedRepo := make(map[string]Repo)
 
 	// Define the route for the index page and display the index.html template
@@ -77,7 +83,8 @@ func main() {
 	// standalone functions that will be used as route handlers.
 	router.GET("user/:username", func(c *gin.Context) {
 
-		name := c.Param("username")
+		username := c.Param("username")
+		responseType := c.Query("response_type")
 
 		// Search options to override the default 30 and fetch max 100 per page
 		opt := &github.SearchOptions{
@@ -93,7 +100,7 @@ func main() {
 		for {
 			prs, resp, _ := client.Search.Issues(
 				// Search query to find PR's
-				fmt.Sprintf("type:pr author:%s is:public", name),
+				fmt.Sprintf("type:pr author:%s is:public", username),
 				opt,
 			)
 
@@ -153,6 +160,7 @@ func main() {
 				}
 
 				allPrs = append(allPrs, pr)
+
 			}
 
 			if resp.NextPage == 0 {
@@ -164,13 +172,32 @@ func main() {
 
 		allRepos = groupByRepo(allPrs, CachedRepo)
 
-		c.JSON(
-			200,
-			gin.H{
-				"total": len(allRepos),
-				"repos": allRepos,
-			},
-		)
+		if responseType == "json" {
+			c.JSON(
+				200,
+				gin.H{
+					"username":   username,
+					"totalRepos": len(allRepos),
+					"totalPrs":   len(allPrs),
+					"allRepos":   allRepos,
+				},
+			)
+		} else {
+			// Call the HTML method of the Context to render a template
+			c.HTML(
+				// HTTP status
+				200,
+				// Use the index.html template
+				"index.html",
+				// Pass the data that the page uses (in this case, 'title')
+				gin.H{
+					"username":   username,
+					"totalRepos": len(allRepos),
+					"totalPrs":   len(allPrs),
+					"allRepos":   allRepos,
+				},
+			)
+		}
 
 	})
 

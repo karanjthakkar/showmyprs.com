@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PR's - @{{ .username }}</title>
+  <link rel="stylesheet" type="text/css" href="/assets/styles/app.css">
+</head>
+<body>
+  <div class="details">
+    <a class="details__username" href="https://github.com/{{ .username }}">@{{ .username }}</a>
+    <div class="details__stats">
+      <span>
+        <i class="icon-repo"></i>
+        Total contributed repositories: {{ .totalRepos }}
+      </span>
+      <span>
+        <i class="icon-pr"></i>
+        Total pull requests sent: {{ .totalPrs }}
+      </span>
+    </div>
+  </div>
+
+  <ul class="repos js-repos-list">
+    {{range .allRepos }}
+      <li class="repos__item">
+          <div class="repos__item__header">
+            <a class="repos__item__name" href="{{ .Url }}">
+              {{ .Name }}
+            </a>
+            <div>
+              <span class="repos__item__stat">
+                <i class="icon-star"></i>
+                {{ .Stars }}
+              </span>
+              <span class="repos__item__stat">
+                <i class="icon-fork"></i>
+                {{ .Forks }}
+              </span>
+            </div>
+          </div>
+          <span class="repos__item__body">Pull Requests:</span>
+          <ul class="repos__item__list">
+            {{range .PullRequests }}
+              <li class="repos__item__list__item">
+                - <a href="{{ .Url }}">
+                  {{ .Title }}
+                </a>
+                &nbsp;[{{ .State }}]
+              </li>
+            {{end}}
+          </ul>
+      </li>
+    {{end}}
+  </ul>
+</body>
+</html>
