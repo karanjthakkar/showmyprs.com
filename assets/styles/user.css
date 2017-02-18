@@ -8,6 +8,7 @@ body, html {
 }
 
 body {
+  margin: 0;
   font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 }
 
@@ -22,6 +23,7 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 24px;
 }
 
 .details__username {

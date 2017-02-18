@@ -78,9 +78,19 @@ func main() {
 	// Cache repo data
 	CachedRepo := make(map[string]Repo)
 
-	// Define the route for the index page and display the index.html template
-	// To start with, we'll use an inline route handler. Later on, we'll create
-	// standalone functions that will be used as route handlers.
+	// Default landing page
+	router.GET("/", func(c *gin.Context) {
+		// Call the HTML method of the Context to render a template
+		c.HTML(
+			// HTTP status
+			200,
+			// Use the index.html template
+			"index.html",
+			gin.H{},
+		)
+	})
+
+	// User handler
 	router.GET("user/:username", func(c *gin.Context) {
 
 		username := c.Param("username")
@@ -187,8 +197,8 @@ func main() {
 			c.HTML(
 				// HTTP status
 				200,
-				// Use the index.html template
-				"index.html",
+				// Use the user.html template
+				"user.html",
 				// Pass the data that the page uses (in this case, 'title')
 				gin.H{
 					"username":   username,
