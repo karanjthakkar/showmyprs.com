@@ -25,7 +25,8 @@ module.exports = function(grunt) {
     usemin: {
       options: {
         assetsDirs: [
-          'dist'
+          'dist',
+          'dist/assets/fonts'
         ]
       },
       html: ['dist/**/*.html'],
@@ -56,16 +57,6 @@ module.exports = function(grunt) {
 
     copy: {
       static_dist: {
-        files: [{
-          expand: true,
-          src: [
-            'assets/**/*',
-            'templates/**/*'
-          ],
-          dest: 'dist'
-        }]
-      },
-      static_assets: {
         files: [{
           expand: true,
           src: [
@@ -118,7 +109,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build_static', [
     'copy:static_dist',
-    'copy:static_assets',
     'useminPrepare',
     'postcss',
     'concat',
