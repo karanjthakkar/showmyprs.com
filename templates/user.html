@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="details">
-    <a class="details__username" href="https://github.com/{{ .username }}">@{{ .username }}</a>
+    <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .username }}">@{{ .username }}</a>
     <div class="details__stats">
       <span>
         <i class="icon-repo"></i>
@@ -25,7 +25,7 @@
     {{range .allRepos }}
       <li class="repos__item">
           <div class="repos__item__header">
-            <a class="repos__item__name" href="{{ .Url }}">
+            <a class="repos__item__name" target="_blank" rel="noopener nofollow" href="{{ .Url }}">
               {{ .Name }}
             </a>
             <div>
@@ -43,7 +43,7 @@
           <ul class="repos__item__list">
             {{range .PullRequests }}
               <li class="repos__item__list__item">
-                - <a href="{{ .Url }}">
+                - <a target="_blank" rel="noopener nofollow" href="{{ .Url }}">
                   {{ .Title }}
                 </a>
                 &nbsp;[{{ .State }}]

@@ -46,6 +46,7 @@ a {
   list-style: none;
   counter-reset: section;
   padding-left: 0;
+  justify-content: center;
 }
 
 .repos__item {
@@ -117,40 +118,6 @@ a {
   border-bottom: 0;
   padding-bottom: 0;
   color: #525252;
-}
-
-/* Components */
-/* List */
-.list {
-  list-style: none;
-  counter-reset: section;
-  padding-left: 0;
-}
-
-.list__item {
-  position: relative;
-  padding-left: 44px;
-  font-size: 24px;
-  line-height: 40px;
-}
-
-.list__item:before {
-  counter-increment: section;
-  content: "" counter(section) ". ";
-  position: absolute;
-  left: 0;
-  top: 6px;
-}
-
-.list__item__heading {
-  margin-bottom: 0;
-}
-
-.list__item__body {
-  margin-top: 15px;
-  margin-bottom: 0;
-  line-height: 1.5;
-  font-size: 20px;
 }
 
 
