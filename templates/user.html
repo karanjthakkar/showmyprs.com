@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>PR's - @{{ .username }}</title>
+  <title>PR's - @{{ .Username }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="/assets/favicon.ico">
 
@@ -29,21 +29,21 @@
 </head>
 <body>
   <div class="details">
-    <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .username }}">@{{ .username }}</a>
+    <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .Username }}">@{{ .Username }}</a>
     <div class="details__stats">
       <span>
         <i class="icon-repo"></i>
-        Total contributed repositories: {{ .totalRepos }}
+        Total contributed repositories: {{ .TotalRepos }}
       </span>
       <span>
         <i class="icon-pr"></i>
-        Total pull requests sent: {{ .totalPrs }}
+        Total pull requests sent: {{ .TotalPrs }}
       </span>
     </div>
   </div>
 
   <ul class="repos js-repos-list">
-    {{range .allRepos }}
+    {{range .AllRepos }}
       <li class="repos__item">
           <div class="repos__item__header">
             <a class="repos__item__name" target="_blank" rel="noopener nofollow" href="{{ .Url }}">

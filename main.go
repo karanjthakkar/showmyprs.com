@@ -74,7 +74,7 @@ func groupByRepo(allPrs []PullRequest, CachedRepo map[string]Repo) []Repo {
 	return allRepos
 }
 
-func SaveDataAsJson(data gin.H, username string) {
+func SaveDataAsJson(data Response, username string) {
 	dir := CACHE_PATH
 	if _, err := os.Stat(dir); err != nil {
 		if os.IsNotExist(err) {
@@ -130,7 +130,7 @@ func main() {
 		responseType := c.Query("response_type")
 		cachePath := concat(CACHE_PATH, username)
 
-		var resultData gin.H
+		var resultData Response
 
 		if _, err := os.Stat(cachePath); err == nil {
 			cacheData, err := ioutil.ReadFile(cachePath)
@@ -138,7 +138,7 @@ func main() {
 			if err != nil {
 				log.Println(err)
 			}
-			data := gin.H{}
+			data := Response{}
 			err = json.Unmarshal(cacheData, &data)
 			// Error unmarshaling the file
 			if err != nil {
@@ -230,11 +230,11 @@ func main() {
 
 			allRepos = groupByRepo(allPrs, CachedRepo)
 
-			data := gin.H{
-				"username":   username,
-				"totalRepos": len(allRepos),
-				"totalPrs":   len(allPrs),
-				"allRepos":   allRepos,
+			data := Response{
+				Username:   username,
+				TotalRepos: len(allRepos),
+				TotalPrs:   len(allPrs),
+				AllRepos:   allRepos,
 			}
 
 			resultData = data
