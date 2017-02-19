@@ -3,3 +3,4 @@ showmyprs.com
 dist
 .tmp
 node_modules
+.cache
