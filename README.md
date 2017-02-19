@@ -30,6 +30,8 @@ I wanted to create an `Open Source` section on [my website](https://karanjthakka
 
 4. These pull requests are then grouped based on the repository and then sent to the client.
 
+**NOTE**: The final response is cached on the server per user in a file `./.cache/<username>`. For now, this will be manually purged by me every 24 hours. Eventually, it should go into some cache like Redis which has its own TTL implementation.
+
 
 ## Contributing 👯
 
