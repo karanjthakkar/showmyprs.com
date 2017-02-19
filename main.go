@@ -19,6 +19,7 @@ func setupGithub() {
 			AccessToken: os.Getenv("GITHUB_TOKEN"),
 		},
 	)
+
 	tc := oauth2.NewClient(oauth2.NoContext, ts)
 
 	client = github.NewClient(tc)
