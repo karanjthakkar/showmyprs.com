@@ -37,7 +37,10 @@ module.exports = function(grunt) {
     filerev: {
       dist: {
         src: [
-          'dist/assets/**/*.*'
+          'dist/assets/**/*.*',
+           /* exclude favicons from fingerprinting */
+          '!dist/assets/favicon.ico',
+          '!dist/assets/favicon.png'
         ]
       }
     },
