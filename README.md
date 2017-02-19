@@ -47,7 +47,7 @@ If you need help figuring out how to contribute (since its written in Go), hit m
 
 
 
-## Coming Next 🔥
+## Coming Next 🔥 (**Want to help? 👇🏻**)
 
 - [ ] Sorting based on the stars/forks that a repository has (https://github.com/karanjthakkar/showmyprs.com/issues/4)
 - [ ] Sorting based on the number of PR's for a repository (https://github.com/karanjthakkar/showmyprs.com/issues/4)
