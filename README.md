@@ -53,7 +53,6 @@ If you need help figuring out how to contribute (since its written in Go), hit m
 
 - [ ] Sorting based on the stars/forks that a repository has ([Issue #4](https://github.com/karanjthakkar/showmyprs.com/issues/))
 - [ ] Sorting based on the number of PR's for a repository ([Issue #4](https://github.com/karanjthakkar/showmyprs.com/issues/))
-- [ ] Response caching for faster profile loads ([Issue #2](https://github.com/karanjthakkar/showmyprs.com/issues/))
 - [ ] Filters based on PR state: Open/Merged/Closed ([Issue #3](https://github.com/karanjthakkar/showmyprs.com/issues/))
 
 
