@@ -19,6 +19,10 @@ a {
   text-decoration: none;
 }
 
+.twitter-share-button {
+  margin-top: 10px;
+}
+
 .details {
   display: flex;
   align-items: center;
@@ -33,7 +37,7 @@ a {
 .details__stats {
   font-size: 16px;
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .details__stats span:first-child {

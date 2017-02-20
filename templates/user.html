@@ -30,6 +30,15 @@
 <body>
   <div class="details">
     <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .Username }}">@{{ .Username }}</a>
+    <a class="twitter-share-button" 
+      data-size="large"
+      href="https://twitter.com/intent/tweet"
+      data-text="🚀 Woah! I have sent a total of {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repositories 🔥 See your open source contributions here 🤓"
+      data-url="https://showmrprs.com"
+      data-related="geekykaran,tweetifyio"
+    >
+      Share it
+    </a>
     <div class="details__stats">
       <span>
         <i class="icon-repo"></i>
@@ -74,5 +83,26 @@
       </li>
     {{end}}
   </ul>
+
+  <!-- Twitter Widget Script Start -->
+  <script>
+    window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));
+  </script>
+  <!-- Twitter Widget Script End -->
 </body>
 </html>
