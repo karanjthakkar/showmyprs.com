@@ -38,10 +38,18 @@ a {
   font-size: 16px;
   display: flex;
   margin-top: 10px;
+  justify-content: center;
+  width: 100%;
+  position: relative;
 }
 
-.details__stats span:first-child {
-    margin-right: 40px;
+.details__stats > span:first-child {
+  margin-right: 40px;
+}
+
+.detail__stats__time {
+  position: absolute;
+  right: 10px;
 }
 
 .repos {

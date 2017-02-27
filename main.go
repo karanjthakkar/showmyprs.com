@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -10,20 +9,13 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"strconv"
 	"strings"
+	"time"
 )
 
 var router *gin.Engine
 var client *github.Client
 var CACHE_PATH = "./.cache/"
-
-func concat(a string, b string) string {
-	var buffer bytes.Buffer
-	buffer.WriteString(a)
-	buffer.WriteString(b)
-	return buffer.String()
-}
 
 func setupGithub() {
 	ts := oauth2.StaticTokenSource(
@@ -35,64 +27,6 @@ func setupGithub() {
 	tc := oauth2.NewClient(oauth2.NoContext, ts)
 
 	client = github.NewClient(tc)
-}
-
-// Parse the github PR url of the format:
-// https://github.com/ubilabs/react-geosuggest/pull/253
-// to retrive the owner: ubilabs, repo: react-geosuggest, number: 253
-func parseGithubPrUrl(url string) ParsedPrUrl {
-	prParts := strings.Split(url, "/")
-	owner := prParts[3]
-	repo := prParts[4]
-	pullNumber, _ := strconv.Atoi(prParts[6])
-
-	return ParsedPrUrl{
-		Owner:  owner,
-		Repo:   repo,
-		Number: pullNumber,
-	}
-}
-
-func groupByRepo(allPrs []PullRequest, CachedRepo map[string]Repo) []Repo {
-	var allRepos []Repo
-	currentRepoIndex := len(allRepos)
-	urlMap := make(map[string]int)
-	for _, pr := range allPrs {
-		// If not found in map, its a new repo
-		// Save its index
-		// If found, push the PR object to the pr list
-		// inside the repo object
-		if _, isCached := urlMap[pr.RepoUrl]; isCached == false {
-			urlMap[pr.RepoUrl] = currentRepoIndex
-			allRepos = append(allRepos, CachedRepo[pr.RepoUrl])
-			allRepos[currentRepoIndex].PullRequests = append(allRepos[currentRepoIndex].PullRequests, pr)
-			currentRepoIndex = currentRepoIndex + 1
-		} else {
-			allRepos[urlMap[pr.RepoUrl]].PullRequests = append(allRepos[urlMap[pr.RepoUrl]].PullRequests, pr)
-		}
-	}
-	return allRepos
-}
-
-func SaveDataAsJson(data Response, username string) {
-	dir := CACHE_PATH
-	if _, err := os.Stat(dir); err != nil {
-		if os.IsNotExist(err) {
-			os.Mkdir(dir, 0755)
-		} else {
-			log.Println(err)
-		}
-	}
-
-	path := concat(dir, username)
-	os.Remove(path)
-
-	b, err := json.Marshal(data)
-	if err != nil {
-		log.Println(err)
-	}
-
-	ioutil.WriteFile(path, b, 0644)
 }
 
 func main() {
@@ -144,6 +78,7 @@ func main() {
 			if err != nil {
 				log.Println(err)
 			}
+
 			resultData = data
 		} else {
 			// Search options to override the default 30 and fetch max 100 per page
@@ -230,11 +165,16 @@ func main() {
 
 			allRepos = groupByRepo(allPrs, CachedRepo)
 
+			currentTime := time.Now()
+
 			data := Response{
-				Username:   username,
-				TotalRepos: len(allRepos),
-				TotalPrs:   len(allPrs),
-				AllRepos:   allRepos,
+				LastSyncedAt:              currentTime.Unix(),
+				LastSyncedAtString:        getTimeAgo(currentTime.Unix()),
+				LastSyncedAtStringVerbose: currentTime.Format("Jan 2, 2006 at 3:04pm (MST)"),
+				Username:                  username,
+				TotalRepos:                len(allRepos),
+				TotalPrs:                  len(allPrs),
+				AllRepos:                  allRepos,
 			}
 
 			resultData = data

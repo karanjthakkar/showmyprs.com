@@ -24,6 +24,7 @@
   <!-- Twitter Card End -->
 
   <!-- build:css(dist) /assets/styles/user.css -->
+  <link rel="stylesheet" type="text/css" href="/assets/styles/hint.css">
   <link rel="stylesheet" type="text/css" href="/assets/styles/user.css">
   <!-- endbuild -->
 </head>
@@ -47,6 +48,9 @@
       <span>
         <i class="icon-pr"></i>
         Total pull requests sent: {{ .TotalPrs }}
+      </span>
+      <span class="detail__stats__time">
+        Last synced: <span class="hint--bottom" aria-label="{{ .LastSyncedAtStringVerbose }}">{{ .LastSyncedAtString }}</span>
       </span>
     </div>
   </div>
