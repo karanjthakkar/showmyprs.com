@@ -79,6 +79,9 @@ func main() {
 				log.Println(err)
 			}
 
+			// Update the last synced at string
+			data.LastSyncedAtString = getTimeAgo(data.LastSyncedAt)
+
 			resultData = data
 		} else {
 			// Search options to override the default 30 and fetch max 100 per page
