@@ -33,8 +33,11 @@
     <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .Username }}">@{{ .Username }}</a>
     <a class="twitter-share-button" 
       data-size="large"
-      href="https://twitter.com/intent/tweet"
-      data-text="🚀 Woah! I have sent a total of {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repositories 🔥 See your open source contributions here 🤓"
+      target="_blank"
+      rel="noopener nofollow" 
+      href="https://twitter.com/intent/tweet?text=🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓&url=https://showmrprs.com&related=geekykaran,tweetifyio&hashtags=IHeartOSS"
+      data-text="🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓"
+      data-hashtags="IHeartOSS"
       data-url="https://showmrprs.com"
       data-related="geekykaran,tweetifyio"
     >
