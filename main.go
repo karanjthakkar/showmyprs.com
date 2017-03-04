@@ -187,6 +187,8 @@ func main() {
 			go SaveDataAsJson(data, username)
 		}
 
+		resultData.ResponseType = responseType
+
 		if responseType == "json" {
 			c.JSON(
 				200,

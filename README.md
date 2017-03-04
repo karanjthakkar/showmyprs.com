@@ -10,6 +10,7 @@ I wanted to create an `Open Source` section on [my website](https://karanjthakka
 1. Show the actual status of each pull request: `open` / `closed` / `merged`
 2. All your Pull Requests grouped by repositories: `/user/<username>`
 3. Add `?response_type=json` to consume the json response directly
+4. Add `?response_type=iframe` to get the embeddable via iframe document
 
 
 ## Implementation notes 🙇🏻

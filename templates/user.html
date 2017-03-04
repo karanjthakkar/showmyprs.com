@@ -15,13 +15,15 @@
   <meta property="og:description" content="See all your Open Source contributions in one place."/>
   <!-- Open Graph End -->
 
-  <!-- Twitter Card Start -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@geekykaran" />
-  <meta name="twitter:title" content="showmyprs.com" />
-  <meta name="twitter:description" content="See all your Open Source contributions in one place." />
-  <meta name="twitter:image" content="https://showmyprs.com/assets/favicon.png" />
-  <!-- Twitter Card End -->
+  {{if (ne .ResponseType "iframe")}}
+    <!-- Twitter Card Start -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@geekykaran" />
+    <meta name="twitter:title" content="showmyprs.com" />
+    <meta name="twitter:description" content="See all your Open Source contributions in one place." />
+    <meta name="twitter:image" content="https://showmyprs.com/assets/favicon.png" />
+    <!-- Twitter Card End -->
+  {{end}}
 
   <!-- build:css(dist) /assets/styles/user.css -->
   <link rel="stylesheet" type="text/css" href="/assets/styles/hint.css">
@@ -29,20 +31,23 @@
   <!-- endbuild -->
 </head>
 <body>
+
   <div class="details">
-    <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .Username }}">@{{ .Username }}</a>
-    <a class="twitter-share-button"
-      data-size="large"
-      target="_blank"
-      rel="noopener nofollow"
-      href="https://twitter.com/intent/tweet?text=🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓&url=https://showmyprs.com&related=geekykaran,tweetifyio&hashtags=IHeartOSS"
-      data-text="🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓"
-      data-hashtags="IHeartOSS"
-      data-url="https://showmyprs.com"
-      data-related="geekykaran,tweetifyio"
-    >
-      Share it
-    </a>
+    {{if (ne .ResponseType "iframe")}}
+      <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .Username }}">@{{ .Username }}</a>
+      <a class="twitter-share-button"
+        data-size="large"
+        target="_blank"
+        rel="noopener nofollow"
+        href="https://twitter.com/intent/tweet?text=🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓&url=https://showmyprs.com&related=geekykaran,tweetifyio&hashtags=IHeartOSS"
+        data-text="🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓"
+        data-hashtags="IHeartOSS"
+        data-url="https://showmyprs.com"
+        data-related="geekykaran,tweetifyio"
+      >
+        Share it
+      </a>
+    {{end}}
     <div class="details__stats">
       <span>
         <i class="icon-repo"></i>
@@ -52,9 +57,11 @@
         <i class="icon-pr"></i>
         Total pull requests sent: {{ .TotalPrs }}
       </span>
-      <span class="detail__stats__time">
-        Last synced: <span class="hint--left" aria-label="{{ .LastSyncedAtStringVerbose }}">{{ .LastSyncedAtString }}</span>
-      </span>
+      {{if (ne .ResponseType "iframe")}}
+        <span class="detail__stats__time">
+          Last synced: <span class="hint--left" aria-label="{{ .LastSyncedAtStringVerbose }}">{{ .LastSyncedAtString }}</span>
+        </span>
+      {{end}}
     </div>
   </div>
 
@@ -91,26 +98,28 @@
     {{end}}
   </ul>
 
-  <!-- Twitter Widget Script Start -->
-  <script>
-    window.twttr = (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
+  {{if (ne .ResponseType "iframe")}}
+    <!-- Twitter Widget Script Start -->
+    <script>
+      window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
 
-      t._e = [];
-      t.ready = function(f) {
-        t._e.push(f);
-      };
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
 
-      return t;
-    }(document, "script", "twitter-wjs"));
-  </script>
-  <!-- Twitter Widget Script End -->
+        return t;
+      }(document, "script", "twitter-wjs"));
+    </script>
+    <!-- Twitter Widget Script End -->
+  {{end}}
 
   <!-- Google Analytics Start -->
   <script>
@@ -124,5 +133,9 @@
 
   </script>
   <!-- Google Analytics End -->
+
+{{if (eq .ResponseType "iframe")}}
+  <span class="madeBy">Powered by <a href="https://showmyprs.com/" target="_blank">Show My Pr's</a></span>
+{{end}}
 </body>
 </html>
