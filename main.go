@@ -98,6 +98,7 @@ func main() {
 			for {
 				prs, resp, _ := client.Search.Issues(
 					// Search query to find PR's
+					c,
 					fmt.Sprintf("type:pr author:%s is:public", username),
 					opt,
 				)
@@ -122,7 +123,7 @@ func main() {
 					// Cache repo stats and only make calls for new ones
 					var repo Repo
 					if _, isCached := CachedRepo[repoUrl]; isCached == false {
-						repoData, _, _ := client.Repositories.Get(parsedPrUrl.Owner, parsedPrUrl.Repo)
+						repoData, _, _ := client.Repositories.Get(c, parsedPrUrl.Owner, parsedPrUrl.Repo)
 						repo = Repo{
 							Stars:        *repoData.StargazersCount,
 							Forks:        *repoData.ForksCount,
@@ -138,6 +139,7 @@ func main() {
 					// Get merged status
 					if *githubPrObject.State == "closed" {
 						isPrMerged, _, _ := client.PullRequests.IsMerged(
+							c,
 							parsedPrUrl.Owner,
 							parsedPrUrl.Repo,
 							parsedPrUrl.Number,
