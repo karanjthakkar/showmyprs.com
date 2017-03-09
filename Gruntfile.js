@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         command: 'GOOS=linux GOARCH=amd64 go build'
       },
       'deploy': {
-        command: 'scp -r -i ~/.ssh/tweetify.pem ./dist/templates ./dist/assets ./showmyprs.com ubuntu@52.87.181.233:/home/ubuntu/showmyprs'
+        command: 'scp -r -i ~/.ssh/tweetify.pem ./dist/templates ./dist/assets ./showmyprs.com ./refresh.sh ubuntu@52.87.181.233:/home/ubuntu/showmyprs'
       }
     },
 

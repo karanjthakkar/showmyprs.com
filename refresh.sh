@@ -1,15 +1,12 @@
 # Crontab entry:
-# 0 * * * * /home/ubuntu/showmyprs.sh >> /home/ubuntu/showmypr-cron-out.log 2>>/home/ubuntu/showmypr-cron-err.log
+# 0,30 * * * * /home/ubuntu/showmyprs/refresh.sh >> /home/ubuntu/showmypr-cron-out.log 2>>/home/ubuntu/showmypr-cron-err.log
 #
-# This is a cronjob that runs every 1 hour and updates the cache
-# for the oldest 10 users in the cache. Every 1 hour because it
-# uses the same Github access token as the actual app which has
-# a max limit of 5000. So as to not exhaust that limit and impair
-# real time user experience, we refresh only 10 users at a time
+# This is a cronjob that runs every 30 minutes
+# and updates the cache for the oldest 10 users.
 echo "Running cronjob $(date)"
 
 # Base url for the user profile endpoint
-url="http://localhost:9000/user"
+url="http://localhost:9001/user"
 
 # Get a list of files inside the cache directory ordered by time (oldest first)
 # Iterate through the top 10 of the filenames (which are usernames)
