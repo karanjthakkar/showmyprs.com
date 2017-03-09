@@ -33,6 +33,18 @@ I wanted to create an `Open Source` section on [my website](https://karanjthakka
 **NOTE**: The final response is cached on the server per user in a file `./.cache/<username>`. For now, this will be ~~manually purged by me every 24 hours~~ automatically refreshed every 30 minutes using a cron job running via [this bash script](./refresh.sh). Eventually, it should go into some cache like Redis which has its own TTL implementation.
 
 
+## Coming Next 🔥 (**Want to help? 👇🏻**)
+
+- [ ] Sorting based on the stars/forks that a repository has ([Issue #4](https://github.com/karanjthakkar/showmyprs.com/issues/4))
+- [ ] Sorting based on the number of PR's for a repository ([Issue #4](https://github.com/karanjthakkar/showmyprs.com/issues/4))
+- [ ] Filters based on PR state: Open/Merged/Closed ([Issue #3](https://github.com/karanjthakkar/showmyprs.com/issues/3))
+
+
+## Known Issues 💩
+
+- Maximum limit of 1000 on the total pull requests sent ([Issue #10](https://github.com/karanjthakkar/showmyprs.com/issues/10))
+
+
 ## Contributing 👯
 
 - Make sure you have installed Go and setup your workspace
@@ -46,14 +58,6 @@ If you need help figuring out how to contribute (since its written in Go), hit m
 
 - Pre-requisite: `npm install`
 - `grunt build deploy`: This builds the binary for my Ubuntu linux instance on Amazon EC2 and uploads it along with the web assets via `scp`.
-
-
-
-## Coming Next 🔥 (**Want to help? 👇🏻**)
-
-- [ ] Sorting based on the stars/forks that a repository has ([Issue #4](https://github.com/karanjthakkar/showmyprs.com/issues/))
-- [ ] Sorting based on the number of PR's for a repository ([Issue #4](https://github.com/karanjthakkar/showmyprs.com/issues/))
-- [ ] Filters based on PR state: Open/Merged/Closed ([Issue #3](https://github.com/karanjthakkar/showmyprs.com/issues/))
 
 
 ## License
