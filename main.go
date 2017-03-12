@@ -192,6 +192,16 @@ func main() {
 				200,
 				resultData,
 			)
+		} else if responseType == "iframe" {
+			// Call the HTML method of the Context to render a template
+			c.HTML(
+				// HTTP status
+				200,
+				// Use the iframe.html template
+				"iframe.html",
+				// Pass the data that the page uses (in this case, 'title')
+				resultData,
+			)
 		} else {
 			// Call the HTML method of the Context to render a template
 			c.HTML(

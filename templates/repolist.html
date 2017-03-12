@@ -1,0 +1,32 @@
+<ul class="repos js-repos-list">
+  {{range .AllRepos }}
+    <li class="repos__item">
+        <div class="repos__item__header">
+          <a class="repos__item__name" target="_blank" rel="noopener nofollow" href="{{ .Url }}">
+            {{ .Name }}
+          </a>
+          <div>
+            <span class="repos__item__stat">
+              <i class="icon-star"></i>
+              {{ .Stars }}
+            </span>
+            <span class="repos__item__stat">
+              <i class="icon-fork"></i>
+              {{ .Forks }}
+            </span>
+          </div>
+        </div>
+        <span class="repos__item__body">Pull Requests:</span>
+        <ul class="repos__item__list">
+          {{range .PullRequests }}
+            <li class="repos__item__list__item">
+              - <a target="_blank" rel="noopener nofollow" href="{{ .Url }}">
+                {{ .Title }}
+              </a>
+              &nbsp;[{{ .State }}]
+            </li>
+          {{end}}
+        </ul>
+    </li>
+  {{end}}
+</ul>

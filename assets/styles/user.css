@@ -173,3 +173,11 @@ a {
   content: "\f02a";
 }
 
+.madeBy {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 0 auto;
+}

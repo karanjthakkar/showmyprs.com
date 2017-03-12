@@ -8,4 +8,5 @@ type Response struct {
 	TotalRepos                int    `json:"totalRepos"`
 	TotalPrs                  int    `json:"totalPrs"`
 	AllRepos                  []Repo `json:"allRepos"`
+	ResponseType              string `json:"responseType"`
 }
