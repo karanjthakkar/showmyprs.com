@@ -15,15 +15,13 @@
   <meta property="og:description" content="See all your Open Source contributions in one place."/>
   <!-- Open Graph End -->
 
-  {{if (ne .ResponseType "iframe")}}
-    <!-- Twitter Card Start -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@geekykaran" />
-    <meta name="twitter:title" content="showmyprs.com" />
-    <meta name="twitter:description" content="See all your Open Source contributions in one place." />
-    <meta name="twitter:image" content="https://showmyprs.com/assets/favicon.png" />
-    <!-- Twitter Card End -->
-  {{end}}
+  <!-- Twitter Card Start -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@geekykaran" />
+  <meta name="twitter:title" content="showmyprs.com" />
+  <meta name="twitter:description" content="See all your Open Source contributions in one place." />
+  <meta name="twitter:image" content="https://showmyprs.com/assets/favicon.png" />
+  <!-- Twitter Card End -->
 
   <!-- build:css(dist) /assets/styles/user.css -->
   <link rel="stylesheet" type="text/css" href="/assets/styles/hint.css">
@@ -33,93 +31,45 @@
 <body>
 
   <div class="details">
-    {{if (ne .ResponseType "iframe")}}
-      <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .Username }}">@{{ .Username }}</a>
-      <a class="twitter-share-button"
-        data-size="large"
-        target="_blank"
-        rel="noopener nofollow"
-        href="https://twitter.com/intent/tweet?text=🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓&url=https://showmyprs.com&related=geekykaran,tweetifyio&hashtags=IHeartOSS"
-        data-text="🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓"
-        data-hashtags="IHeartOSS"
-        data-url="https://showmyprs.com"
-        data-related="geekykaran,tweetifyio"
-      >
-        Share it
-      </a>
-    {{end}}
-    <div class="details__stats">
-      <span>
-        <i class="icon-repo"></i>
-        Total contributed repositories: {{ .TotalRepos }}
-      </span>
-      <span>
-        <i class="icon-pr"></i>
-        Total pull requests sent: {{ .TotalPrs }}
-      </span>
-      {{if (ne .ResponseType "iframe")}}
-        <span class="detail__stats__time">
-          Last synced: <span class="hint--left" aria-label="{{ .LastSyncedAtStringVerbose }}">{{ .LastSyncedAtString }}</span>
-        </span>
-      {{end}}
-    </div>
+    <a class="details__username" target="_blank" rel="noopener nofollow" href="https://github.com/{{ .Username }}">@{{ .Username }}</a>
+    <a class="twitter-share-button"
+      data-size="large"
+      target="_blank"
+      rel="noopener nofollow"
+      href="https://twitter.com/intent/tweet?text=🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓&url=https://showmyprs.com&related=geekykaran,tweetifyio&hashtags=IHeartOSS"
+      data-text="🚀 Woah! I have sent {{ .TotalPrs }} pull requests to {{ .TotalRepos }} repos 🔥 See your open source contributions here 🤓"
+      data-hashtags="IHeartOSS"
+      data-url="https://showmyprs.com"
+      data-related="geekykaran,tweetifyio"
+    >
+      Share it
+    </a>
+
+    {{template "stats.html" .}}
   </div>
 
-  <ul class="repos js-repos-list">
-    {{range .AllRepos }}
-      <li class="repos__item">
-          <div class="repos__item__header">
-            <a class="repos__item__name" target="_blank" rel="noopener nofollow" href="{{ .Url }}">
-              {{ .Name }}
-            </a>
-            <div>
-              <span class="repos__item__stat">
-                <i class="icon-star"></i>
-                {{ .Stars }}
-              </span>
-              <span class="repos__item__stat">
-                <i class="icon-fork"></i>
-                {{ .Forks }}
-              </span>
-            </div>
-          </div>
-          <span class="repos__item__body">Pull Requests:</span>
-          <ul class="repos__item__list">
-            {{range .PullRequests }}
-              <li class="repos__item__list__item">
-                - <a target="_blank" rel="noopener nofollow" href="{{ .Url }}">
-                  {{ .Title }}
-                </a>
-                &nbsp;[{{ .State }}]
-              </li>
-            {{end}}
-          </ul>
-      </li>
-    {{end}}
-  </ul>
+  {{template "repolist.html" .}}
 
-  {{if (ne .ResponseType "iframe")}}
-    <!-- Twitter Widget Script Start -->
-    <script>
-      window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-          t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
+  <!-- Twitter Widget Script Start -->
+  <script>
+    window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
 
-        t._e = [];
-        t.ready = function(f) {
-          t._e.push(f);
-        };
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
 
-        return t;
-      }(document, "script", "twitter-wjs"));
-    </script>
-    <!-- Twitter Widget Script End -->
-  {{end}}
+      return t;
+    }(document, "script", "twitter-wjs"));
+  </script>
+  <!-- Twitter Widget Script End -->
 
   <!-- Google Analytics Start -->
   <script>
@@ -133,9 +83,5 @@
 
   </script>
   <!-- Google Analytics End -->
-
-{{if (eq .ResponseType "iframe")}}
-  <span class="madeBy">Powered by <a href="https://showmyprs.com/" target="_blank">Show My Pr's</a></span>
-{{end}}
 </body>
 </html>
