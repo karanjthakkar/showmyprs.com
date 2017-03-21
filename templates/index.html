@@ -43,7 +43,7 @@
       }
     }
     function showPrs() {
-      var username = document.querySelector('.js-username').value;
+      var username = document.querySelector('.js-username').value.toLowerCase();
       if (username) {
         window.location = 'http://showmyprs.com/user/' + username;
       }

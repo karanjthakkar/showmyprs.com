@@ -60,7 +60,7 @@ func main() {
 	// User handler
 	router.GET("user/:username", func(c *gin.Context) {
 
-		username := c.Param("username")
+		username := strings.ToLower(c.Param("username"))
 		responseType := c.Query("response_type")
 		cachePath := concat(CACHE_PATH, username)
 
