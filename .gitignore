@@ -4,3 +4,4 @@ dist
 .tmp
 node_modules
 .cache
+.env.dev
