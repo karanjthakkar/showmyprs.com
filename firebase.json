@@ -3,6 +3,11 @@
     "rewrites": [{
       "source": "/user/**",
       "function": "user"
+    }],
+    "redirects": [{
+      "source": "/bro",
+      "destination": "https://firebase.google.com/",
+      "type": 302
     }]
   }
 }
