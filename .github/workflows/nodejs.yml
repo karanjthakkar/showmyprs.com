@@ -25,6 +25,6 @@ jobs:
       run: cd functions && npm ci && cd ..
         
     - name: Deploy to Firebase functions...
-      run: firebase deploy --only functions --token $FIREBASE_TOKEN
+      run: firebase deploy --token $FIREBASE_TOKEN
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
