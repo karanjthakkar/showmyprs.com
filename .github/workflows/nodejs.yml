@@ -1,0 +1,30 @@
+name: Deploy to firebase functions
+
+on:
+  push:
+    branches:    
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository...
+      uses: actions/checkout@v2.0.0
+      
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1.1.0
+      with:
+        version: 12.x
+        
+    - name: Install firebase-tools...
+      run: npm install -g firebase-tools
+
+    - name: Install dependencies...      
+      run: cd functions && npm ci && cd ..
+        
+    - name: Deploy to Firebase functions...
+      run: firebase deploy --only functions --token $FIREBASE_TOKEN
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
