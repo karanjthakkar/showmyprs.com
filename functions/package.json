@@ -12,7 +12,7 @@
     "node": "10"
   },
   "dependencies": {
-    "@hapi/hapi": "^18.4.0",
+    "@hapi/hapi": "^19.1.1",
     "@octokit/rest": "^16.37.0",
     "dotenv": "^8.2.0",
     "firebase": "^7.7.0",
